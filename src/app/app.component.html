@@ -1,0 +1,48 @@
+<router-outlet>
+  <br>
+  <div *ngIf="enterUname" class="menu">
+    <div class="back">
+      <img src='{{urlh}}' draggable="false" />
+    </div>
+    <div class="name">Hello: <strong>{{uname}}</strong></div>
+  </div>
+  
+  <p class="leftxt">{{clasms.userName}} is {{clasms.status}}</p>
+  <div *ngIf="!enterUname" class="cuname">
+    <h2>Please write your user name</h2>
+    <div>
+      <input name="uname" [(ngModel)]="uname" type="text" />
+      <hr>
+      <mat-radio-group [(ngModel)]="urlh" aria-label="Select an option">
+        <mat-radio-button value="../assets/img/reno.png"></mat-radio-button>
+        <img src="../assets/img/reno.png" width="10%" draggable="false" />
+        <mat-radio-button value="../assets/img/unicornio.png"></mat-radio-button >
+        <img src="../assets/img/unicornio.png" width="10%" draggable="false" />
+      </mat-radio-group>
+      <br> <br>
+      <button mat-button (click)="choseUser()">Chose</button>
+    </div>
+  </div>
+  <div *ngIf="enterUname">
+    <ol class="chat">
+      <li class="{{message.color}}" *ngFor="let message of messages">
+        <br>
+        <div class="avatar">
+          <img src='{{message.photo}}' draggable="false" />
+        </div>
+        <div class="msg">
+          
+          <span class="time">{{message.message}} </span>
+          <p>{{message.userName}}</p>
+        </div>
+      </li>
+    </ol>
+    <input placeholder="Input" name="message" [(ngModel)]="message" (keyup)="onKeydown()"
+      class="textarea" type="text" placeholder="Type here!" />
+
+    <div class="sendButton">
+      <button mat-button *ngIf="uname" (click)="sendMessage()">Send</button>
+    </div>
+  </div>
+
+</router-outlet>
